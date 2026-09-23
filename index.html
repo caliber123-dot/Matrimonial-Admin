@@ -1,0 +1,1913 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Matrimonial Admin Dashboard</title>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Google Font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --maroon: #741329;
+            --maroon-dark: #54101f;
+            --gold: #d6a642;
+            --cream: #fff8ef;
+            --bg: #f7f5f3;
+            --text: #292525;
+            --muted: #777;
+            --border: #eadfd9;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: "DM Sans", sans-serif;
+        }
+
+        /* =========================
+           TOP HEADER
+        ========================= */
+
+        .top-header {
+            height: 78px;
+            background: #fff;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            padding: 0 30px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+        }
+
+        .brand-logo {
+            width: 58px;
+            height: 58px;
+            border: 2px solid var(--maroon);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--maroon);
+            font-size: 29px;
+            position: relative;
+        }
+
+        .brand-logo i {
+            position: absolute;
+            top: -8px;
+            right: -3px;
+            font-size: 18px;
+        }
+
+        .brand-title {
+            font-family: "Playfair Display", serif;
+            color: var(--maroon);
+            font-size: 25px;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .brand-subtitle {
+            font-size: 12px;
+            color: #777;
+            margin-top: 4px;
+        }
+
+        .header-right {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .search-box {
+            width: 260px;
+            position: relative;
+        }
+
+        .search-box input {
+            height: 40px;
+            padding-right: 45px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
+        .search-box button {
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 40px;
+            width: 42px;
+            border: 0;
+            background: transparent;
+            color: #555;
+        }
+
+        .notification {
+            position: relative;
+            font-size: 21px;
+            color: #444;
+            cursor: pointer;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #dc3545;
+            color: #fff;
+            font-size: 9px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .admin-profile {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .admin-avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: #222;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .main-navbar {
+            background: var(--maroon);
+            min-height: 57px;
+        }
+
+        .main-navbar .navbar {
+            padding: 0 25px;
+        }
+
+        .main-navbar .nav-link {
+            color: white !important;
+            padding: 17px 18px !important;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        .main-navbar .nav-link:hover,
+        .main-navbar .nav-link.active {
+            background: var(--gold);
+            color: #2c2111 !important;
+        }
+
+        .main-navbar .nav-link i {
+            margin-right: 7px;
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            min-height: 270px;
+            position: relative;
+            overflow: hidden;
+            background:
+                linear-gradient(90deg,
+                    rgba(89, 15, 31, .75),
+                    rgba(255, 247, 230, .80),
+                    rgba(255, 244, 218, .65)),
+                url("https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1800&q=80") center / cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 700px;
+        }
+
+        .hero-title {
+            font-family: "Playfair Display", serif;
+            color: var(--maroon);
+            font-size: 43px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .hero-subtitle {
+            font-family: "Playfair Display", serif;
+            color: var(--maroon);
+            font-size: 26px;
+        }
+
+        .hero-divider {
+            color: var(--gold);
+            font-size: 23px;
+            margin: 8px 0;
+        }
+
+        .hero-marathi {
+            color: #a32039;
+            font-size: 21px;
+            font-weight: 600;
+        }
+
+        .hero-description {
+            margin-top: 8px;
+            color: #3f3a37;
+        }
+
+        /* =========================
+           PAGE CONTAINER
+        ========================= */
+
+        .dashboard-container {
+            padding: 25px 30px 30px;
+            max-width: 1600px;
+            margin: auto;
+        }
+
+        /* =========================
+           STAT CARDS
+        ========================= */
+
+        .stat-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 18px;
+            height: 100%;
+            transition: .2s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, .07);
+        }
+
+        .stat-icon {
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 25px;
+        }
+
+        .stat-title {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 3px;
+        }
+
+        .stat-value {
+            font-size: 26px;
+            font-weight: 700;
+        }
+
+        .stat-small {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .daan .stat-icon {
+            background: #dff5e5;
+            color: #138a3d;
+        }
+
+        .income .stat-icon {
+            background: #e4f2ff;
+            color: #1663a6;
+        }
+
+        .expense .stat-icon {
+            background: #ffe3e8;
+            color: #c5203e;
+        }
+
+        .balance .stat-icon {
+            background: #fff1c9;
+            color: #a66a00;
+        }
+
+        .daan .stat-value {
+            color: #138a3d;
+        }
+
+        .income .stat-value {
+            color: #164a83;
+        }
+
+        .expense .stat-value {
+            color: #bd1e39;
+        }
+
+        .balance .stat-value {
+            color: #9a6500;
+        }
+
+        /* =========================
+           SECTION CARD
+        ========================= */
+
+        .section-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 22px;
+        }
+
+        .section-header {
+            min-height: 50px;
+            padding: 13px 17px;
+            background: linear-gradient(90deg,
+                    #fff5ef,
+                    #fffdfb);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .section-title {
+            margin: 0;
+            color: var(--maroon);
+            font-family: "Playfair Display", serif;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .view-all {
+            font-size: 12px;
+            color: var(--maroon);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* =========================
+           QUICK ACTIONS
+        ========================= */
+
+        .quick-action {
+            border-radius: 9px;
+            padding: 18px 10px;
+            text-align: center;
+            border: 1px solid #eee;
+            background: white;
+            transition: .2s;
+            cursor: pointer;
+            height: 100%;
+        }
+
+        .quick-action:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(0, 0, 0, .08);
+        }
+
+        .quick-icon {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .quick-title {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .quick-daan {
+            background: #f0fbf3;
+            color: #138a3d;
+        }
+
+        .quick-expense {
+            background: #fff0f3;
+            color: #b91e38;
+        }
+
+        .quick-hall {
+            background: #f3efff;
+            color: #6741b5;
+        }
+
+        .quick-program {
+            background: #fff5ea;
+            color: #d46b00;
+        }
+
+        .quick-vendor {
+            background: #edfafa;
+            color: #087d7d;
+        }
+
+        .quick-report {
+            background: #edf2ff;
+            color: #284b9b;
+        }
+
+        /* =========================
+           TABLE
+        ========================= */
+
+        .table {
+            margin: 0;
+        }
+
+        .table thead th {
+            font-size: 12px;
+            color: #555;
+            background: #fafafa;
+            white-space: nowrap;
+        }
+
+        .table tbody td {
+            font-size: 13px;
+            vertical-align: middle;
+            white-space: nowrap;
+        }
+
+        .table-responsive {
+            border-radius: 0 0 12px 12px;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 4px 9px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .status-paid {
+            background: #dff5e5;
+            color: #138a3d;
+        }
+
+        .status-partial {
+            background: #fff1c9;
+            color: #996600;
+        }
+
+        .status-pending {
+            background: #ffe1e5;
+            color: #c5223e;
+        }
+
+        /* =========================
+           EVENT CARD
+        ========================= */
+
+        .event-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .event-header {
+            padding: 13px 15px;
+            background: #fff5ef;
+            border-bottom: 1px solid var(--border);
+            color: var(--maroon);
+            font-family: "Playfair Display", serif;
+            font-weight: 700;
+        }
+
+        .event-body {
+            padding: 16px;
+        }
+
+        .event-name {
+            font-weight: 700;
+            font-size: 17px;
+            margin-bottom: 12px;
+        }
+
+        .event-info {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 9px;
+            font-size: 13px;
+            color: #555;
+        }
+
+        .event-info i {
+            color: var(--maroon);
+        }
+
+        .btn-maroon {
+            background: var(--maroon);
+            color: white;
+            border: none;
+            border-radius: 7px;
+            padding: 8px 15px;
+            font-size: 12px;
+        }
+
+        .btn-maroon:hover {
+            background: var(--maroon-dark);
+            color: white;
+        }
+
+        /* =========================
+           CHART
+        ========================= */
+
+        .donut-chart {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 15px auto;
+            background:
+                conic-gradient(#2784cf 0deg 94deg,
+                    #f04e7c 94deg 235deg,
+                    #39a95a 235deg 282deg,
+                    #f7b731 282deg 311deg,
+                    #ae5bc5 311deg 360deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .donut-inner {
+            width: 92px;
+            height: 92px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .donut-value {
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .donut-label {
+            font-size: 10px;
+            color: #777;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 12px;
+            margin: 8px 0;
+        }
+
+        .legend-left {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .legend-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+        }
+
+        .dot-blue {
+            background: #2784cf;
+        }
+
+        .dot-pink {
+            background: #f04e7c;
+        }
+
+        .dot-green {
+            background: #39a95a;
+        }
+
+        .dot-yellow {
+            background: #f7b731;
+        }
+
+        .dot-purple {
+            background: #ae5bc5;
+        }
+
+        /* =========================
+           PROGRAM LIST
+        ========================= */
+
+        .program-item {
+            display: flex;
+            gap: 12px;
+            padding: 11px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .program-item:last-child {
+            border-bottom: 0;
+        }
+
+        .program-date {
+            width: 38px;
+            height: 38px;
+            background: #fff0f0;
+            color: var(--maroon);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .program-date strong {
+            font-size: 15px;
+            line-height: 14px;
+        }
+
+        .program-name {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .program-location {
+            font-size: 11px;
+            color: #888;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .footer {
+            background: var(--maroon);
+            color: white;
+            padding: 17px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+        }
+
+        .footer-center {
+            color: #f4cf77;
+            font-family: "Playfair Display", serif;
+            font-size: 15px;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media(max-width: 991px) {
+
+            .top-header {
+                padding: 0 15px;
+            }
+
+            .brand-title {
+                font-size: 20px;
+            }
+
+            .brand-subtitle {
+                display: none;
+            }
+
+            .search-box {
+                display: none;
+            }
+
+            .main-navbar .navbar {
+                padding: 0 10px;
+            }
+
+            .main-navbar .nav-link {
+                padding: 12px 15px !important;
+            }
+
+            .hero {
+                min-height: 230px;
+            }
+
+            .hero-title {
+                font-size: 31px;
+            }
+
+            .hero-subtitle {
+                font-size: 21px;
+            }
+
+            .dashboard-container {
+                padding: 18px 15px;
+            }
+        }
+
+        @media(max-width: 576px) {
+
+            .top-header {
+                height: 65px;
+            }
+
+            .brand-logo {
+                width: 43px;
+                height: 43px;
+                font-size: 22px;
+            }
+
+            .brand-title {
+                font-size: 17px;
+            }
+
+            .header-right {
+                gap: 12px;
+            }
+
+            .admin-profile span {
+                display: none;
+            }
+
+            .hero {
+                min-height: 210px;
+            }
+
+            .hero-title {
+                font-size: 27px;
+            }
+
+            .hero-subtitle {
+                font-size: 18px;
+            }
+
+            .hero-marathi {
+                font-size: 17px;
+            }
+
+            .hero-description {
+                font-size: 12px;
+            }
+
+            .stat-value {
+                font-size: 21px;
+            }
+
+            .stat-icon {
+                width: 48px;
+                height: 48px;
+                font-size: 21px;
+            }
+
+            .footer {
+                flex-direction: column;
+                gap: 8px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================================================
+     HEADER
+========================================================= -->
+
+    <header class="top-header">
+
+        <div class="brand">
+
+            <div class="brand-logo">
+                <i class="bi bi-heart-fill"></i>
+                ♡
+            </div>
+
+            <div>
+                <div class="brand-title">
+                    Matrimonial Admin
+                </div>
+
+                <div class="brand-subtitle">
+                    Together for a Beautiful Tomorrow
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="header-right">
+
+            <!-- Search -->
+            <div class="search-box">
+                <input type="text" class="form-control" placeholder="Search here...">
+
+                <button>
+                    <i class="bi bi-search"></i>
+                </button>
+            </div>
+
+
+            <!-- Notification -->
+            <div class="notification">
+
+                <i class="bi bi-bell"></i>
+
+                <span class="notification-badge">
+                    3
+                </span>
+
+            </div>
+
+
+            <!-- Admin -->
+            <div class="admin-profile">
+
+                <div class="admin-avatar">
+                    <i class="bi bi-person-fill"></i>
+                </div>
+
+                <span>
+                    Admin
+                    <i class="bi bi-chevron-down"></i>
+                </span>
+
+            </div>
+
+
+            <div class="d-none d-lg-block">
+                <i class="bi bi-gear"></i>
+                Settings
+            </div>
+
+            <div class="text-danger d-none d-lg-block">
+                <i class="bi bi-box-arrow-right"></i>
+                Logout
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================================================
+     NAVIGATION
+========================================================= -->
+
+    <div class="main-navbar">
+
+        <nav class="navbar navbar-expand-lg navbar-dark">
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+
+            <div class="collapse navbar-collapse" id="mainMenu">
+
+                <ul class="navbar-nav">
+
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">
+                            <i class="bi bi-house-door"></i>
+                            Dashboard
+                        </a>
+                    </li>
+
+
+                    <li class="nav-item dropdown">
+
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+
+                            <i class="bi bi-heart"></i>
+                            Wedding
+
+                        </a>
+
+                        <ul class="dropdown-menu">
+
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    Wedding Details
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    Bride & Groom
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    Schedule
+                                </a>
+                            </li>
+
+                        </ul>
+
+                    </li>
+
+
+                    <li class="nav-item dropdown">
+
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+
+                            <i class="bi bi-hand-heart"></i>
+                            Daan / देणगी
+
+                        </a>
+
+                        <ul class="dropdown-menu">
+
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    Add Daan
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    Daan List
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    Daan Report
+                                </a>
+                            </li>
+
+                        </ul>
+
+                    </li>
+
+
+                    <li class="nav-item dropdown">
+
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+
+                            <i class="bi bi-receipt"></i>
+                            Expenses
+
+                        </a>
+
+                        <ul class="dropdown-menu">
+
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    Add Expense
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    Expense List
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    Expense Report
+                                </a>
+                            </li>
+
+                        </ul>
+
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-building"></i>
+                            Bookings
+                        </a>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-calendar-event"></i>
+                            Programs
+                        </a>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-people"></i>
+                            Vendors
+                        </a>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-bar-chart"></i>
+                            Reports
+                        </a>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-gear"></i>
+                            Masters
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </nav>
+
+    </div>
+
+
+    <!-- =========================================================
+     HERO
+========================================================= -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="hero-title">
+                Beautiful Beginnings
+            </div>
+
+            <div class="hero-subtitle">
+                Well Managed
+            </div>
+
+            <div class="hero-divider">
+                ─── ❖ ───
+            </div>
+
+            <div class="hero-marathi">
+                सुखी संसाराच्या शुभेच्छा
+            </div>
+
+            <div class="hero-description">
+                “Good Management Creates Memories for a Lifetime”
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+     DASHBOARD
+========================================================= -->
+
+    <main class="dashboard-container">
+
+
+        <!-- =========================
+         STATISTICS
+    ========================== -->
+
+        <div class="row g-3 mb-4">
+
+            <!-- Daan -->
+
+            <div class="col-6 col-xl-3">
+
+                <div class="stat-card daan">
+
+                    <div class="d-flex align-items-center gap-3">
+
+                        <div class="stat-icon">
+                            <!-- <i class="bi bi-hand-heart-fill"></i> -->
+                            <i class="bi bi-bag-heart-fill"></i>
+                        </div>
+
+                        <div>
+
+                            <div class="stat-title">
+                                Total Daan / देणगी
+                            </div>
+
+                            <div class="stat-value">
+                                ₹ 2,50,000
+                            </div>
+
+                            <div class="stat-small">
+                                125 Donors
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Income -->
+
+            <div class="col-6 col-xl-3">
+
+                <div class="stat-card income">
+
+                    <div class="d-flex align-items-center gap-3">
+
+                        <div class="stat-icon">
+                            <i class="bi bi-wallet-fill"></i>
+                        </div>
+
+                        <div>
+
+                            <div class="stat-title">
+                                Total Income
+                            </div>
+
+                            <div class="stat-value">
+                                ₹ 2,70,000
+                            </div>
+
+                            <div class="stat-small">
+                                Daan + Other Income
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Expense -->
+
+            <div class="col-6 col-xl-3">
+
+                <div class="stat-card expense">
+
+                    <div class="d-flex align-items-center gap-3">
+
+                        <div class="stat-icon">
+                            <i class="bi bi-receipt"></i>
+                        </div>
+
+                        <div>
+
+                            <div class="stat-title">
+                                Total Expense
+                            </div>
+
+                            <div class="stat-value">
+                                ₹ 1,95,000
+                            </div>
+
+                            <div class="stat-small">
+                                48 Entries
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Balance -->
+
+            <div class="col-6 col-xl-3">
+
+                <div class="stat-card balance">
+
+                    <div class="d-flex align-items-center gap-3">
+
+                        <div class="stat-icon">
+                            <i class="bi bi-bar-chart-fill"></i>
+                        </div>
+
+                        <div>
+
+                            <div class="stat-title">
+                                Balance
+                            </div>
+
+                            <div class="stat-value">
+                                ₹ 75,000
+                            </div>
+
+                            <div class="stat-small">
+                                As on 22 Sep 2026
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+         QUICK ACTIONS
+    ====================================================== -->
+
+        <div class="section-card">
+
+            <div class="section-header">
+
+                <h5 class="section-title">
+                    <i class="bi bi-lightning-fill"></i>
+                    Quick Actions
+                </h5>
+
+            </div>
+
+
+            <div class="p-3">
+
+                <div class="row g-2">
+
+
+                    <div class="col-6 col-md-4 col-xl-2">
+
+                        <div class="quick-action quick-daan">
+
+                            <div class="quick-icon">
+                                <!-- <i class="bi bi-hand-heart-fill"></i> -->
+                                <i class="bi bi-bag-heart"></i>
+                            </div>
+
+                            <div class="quick-title">
+                                Add Daan
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-6 col-md-4 col-xl-2">
+
+                        <div class="quick-action quick-expense">
+
+                            <div class="quick-icon">
+                                <i class="bi bi-file-earmark-plus"></i>
+                            </div>
+
+                            <div class="quick-title">
+                                Add Expense
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-6 col-md-4 col-xl-2">
+
+                        <div class="quick-action quick-hall">
+
+                            <div class="quick-icon">
+                                <i class="bi bi-building"></i>
+                            </div>
+
+                            <div class="quick-title">
+                                Hall Booking
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-6 col-md-4 col-xl-2">
+
+                        <div class="quick-action quick-program">
+
+                            <div class="quick-icon">
+                                <i class="bi bi-calendar-plus"></i>
+                            </div>
+
+                            <div class="quick-title">
+                                Add Program
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-6 col-md-4 col-xl-2">
+
+                        <div class="quick-action quick-vendor">
+
+                            <div class="quick-icon">
+                                <i class="bi bi-person-plus"></i>
+                            </div>
+
+                            <div class="quick-title">
+                                Add Vendor
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-6 col-md-4 col-xl-2">
+
+                        <div class="quick-action quick-report">
+
+                            <div class="quick-icon">
+                                <i class="bi bi-bar-chart-fill"></i>
+                            </div>
+
+                            <div class="quick-title">
+                                View Reports
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+        <div class="row g-3">
+
+
+            <!-- LEFT SIDE -->
+
+            <div class="col-xl-9">
+
+
+                <!-- Recent Daan -->
+
+                <div class="section-card">
+
+                    <div class="section-header">
+
+                        <h5 class="section-title">
+                            <i class="bi bi-heart-fill"></i>
+                            Recent Daan / देणगी
+                        </h5>
+
+                        <a href="#" class="view-all">
+                            View All →
+                        </a>
+
+                    </div>
+
+
+                    <div class="table-responsive">
+
+                        <table class="table table-hover">
+
+                            <thead>
+
+                                <tr>
+                                    <th>#</th>
+                                    <th>Donor Name</th>
+                                    <th>Amount</th>
+                                    <th>Date</th>
+                                    <th>Mode</th>
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody>
+
+                                <tr>
+                                    <td>1</td>
+                                    <td>Rahul Patil</td>
+                                    <td>₹ 5,000</td>
+                                    <td>20/09/2026</td>
+                                    <td>Cash</td>
+                                </tr>
+
+                                <tr>
+                                    <td>2</td>
+                                    <td>Amit Sharma</td>
+                                    <td>₹ 2,500</td>
+                                    <td>20/09/2026</td>
+                                    <td>UPI</td>
+                                </tr>
+
+                                <tr>
+                                    <td>3</td>
+                                    <td>Suresh More</td>
+                                    <td>₹ 10,000</td>
+                                    <td>19/09/2026</td>
+                                    <td>Cheque</td>
+                                </tr>
+
+                                <tr>
+                                    <td>4</td>
+                                    <td>Sneha Joshi</td>
+                                    <td>₹ 1,500</td>
+                                    <td>19/09/2026</td>
+                                    <td>Cash</td>
+                                </tr>
+
+                                <tr>
+                                    <td>5</td>
+                                    <td>Kiran Kulkarni</td>
+                                    <td>₹ 5,000</td>
+                                    <td>18/09/2026</td>
+                                    <td>Bank Transfer</td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Recent Expenses -->
+
+                <div class="section-card">
+
+                    <div class="section-header">
+
+                        <h5 class="section-title">
+                            <i class="bi bi-receipt"></i>
+                            Recent Expenses
+                        </h5>
+
+                        <a href="#" class="view-all">
+                            View All →
+                        </a>
+
+                    </div>
+
+
+                    <div class="table-responsive">
+
+                        <table class="table table-hover">
+
+                            <thead>
+
+                                <tr>
+                                    <th>#</th>
+                                    <th>Expense Title</th>
+                                    <th>Amount</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody>
+
+                                <tr>
+                                    <td>1</td>
+                                    <td>Hall Booking</td>
+                                    <td>₹ 50,000</td>
+                                    <td>18/09/2026</td>
+                                    <td>
+                                        <span class="status status-paid">
+                                            Paid
+                                        </span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>2</td>
+                                    <td>Catering</td>
+                                    <td>₹ 75,000</td>
+                                    <td>17/09/2026</td>
+                                    <td>
+                                        <span class="status status-partial">
+                                            Partial
+                                        </span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>3</td>
+                                    <td>Decoration</td>
+                                    <td>₹ 25,000</td>
+                                    <td>16/09/2026</td>
+                                    <td>
+                                        <span class="status status-paid">
+                                            Paid
+                                        </span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>4</td>
+                                    <td>Photography</td>
+                                    <td>₹ 15,000</td>
+                                    <td>15/09/2026</td>
+                                    <td>
+                                        <span class="status status-pending">
+                                            Pending
+                                        </span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>5</td>
+                                    <td>Other Program</td>
+                                    <td>₹ 10,000</td>
+                                    <td>14/09/2026</td>
+                                    <td>
+                                        <span class="status status-paid">
+                                            Paid
+                                        </span>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+             RIGHT SIDE
+        ================================================== -->
+
+            <div class="col-xl-3">
+
+
+                <!-- Current Event -->
+
+                <div class="event-card mb-3">
+
+                    <div class="event-header">
+
+                        <i class="bi bi-calendar-heart"></i>
+                        Current Wedding / Event
+
+                    </div>
+
+
+                    <div class="event-body">
+
+                        <div class="event-name">
+                            Sharma Family Wedding
+                        </div>
+
+
+                        <div class="event-info">
+
+                            <i class="bi bi-calendar"></i>
+
+                            <span>
+                                12 Nov 2026
+                            </span>
+
+                        </div>
+
+
+                        <div class="event-info">
+
+                            <i class="bi bi-geo-alt"></i>
+
+                            <span>
+                                Raj Palace Hall, Nagpur
+                            </span>
+
+                        </div>
+
+
+                        <div class="event-info">
+
+                            <i class="bi bi-people"></i>
+
+                            <span>
+                                Expected Guests: 500
+                            </span>
+
+                        </div>
+
+
+                        <div class="text-end mt-3">
+
+                            <button class="btn btn-maroon">
+                                View Details
+                                <i class="bi bi-arrow-right"></i>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Expense Summary -->
+
+                <div class="section-card">
+
+                    <div class="section-header">
+
+                        <h5 class="section-title">
+
+                            <i class="bi bi-pie-chart-fill"></i>
+
+                            Expense Summary
+
+                        </h5>
+
+                    </div>
+
+
+                    <div class="p-3">
+
+                        <div class="donut-chart">
+
+                            <div class="donut-inner">
+
+                                <div class="donut-value">
+                                    ₹1,95,000
+                                </div>
+
+                                <div class="donut-label">
+                                    Total
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="legend-item">
+
+                            <div class="legend-left">
+                                <span class="legend-dot dot-blue"></span>
+                                Booking Hall
+                            </div>
+
+                            <span>26%</span>
+
+                        </div>
+
+
+                        <div class="legend-item">
+
+                            <div class="legend-left">
+                                <span class="legend-dot dot-pink"></span>
+                                Catering
+                            </div>
+
+                            <span>39%</span>
+
+                        </div>
+
+
+                        <div class="legend-item">
+
+                            <div class="legend-left">
+                                <span class="legend-dot dot-green"></span>
+                                Decoration
+                            </div>
+
+                            <span>13%</span>
+
+                        </div>
+
+
+                        <div class="legend-item">
+
+                            <div class="legend-left">
+                                <span class="legend-dot dot-yellow"></span>
+                                Photography
+                            </div>
+
+                            <span>8%</span>
+
+                        </div>
+
+
+                        <div class="legend-item">
+
+                            <div class="legend-left">
+                                <span class="legend-dot dot-purple"></span>
+                                Other
+                            </div>
+
+                            <span>14%</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Upcoming Programs -->
+
+                <div class="section-card">
+
+                    <div class="section-header">
+
+                        <h5 class="section-title">
+
+                            <i class="bi bi-calendar-event"></i>
+
+                            Upcoming Programs
+
+                        </h5>
+
+                        <a href="#" class="view-all">
+                            View All →
+                        </a>
+
+                    </div>
+
+
+                    <div class="p-3">
+
+
+                        <div class="program-item">
+
+                            <div class="program-date">
+
+                                <strong>10</strong>
+                                NOV
+
+                            </div>
+
+                            <div>
+
+                                <div class="program-name">
+                                    Haldi Program
+                                </div>
+
+                                <div class="program-location">
+                                    Family Residence
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="program-item">
+
+                            <div class="program-date">
+
+                                <strong>11</strong>
+                                NOV
+
+                            </div>
+
+                            <div>
+
+                                <div class="program-name">
+                                    Mehendi Program
+                                </div>
+
+                                <div class="program-location">
+                                    Raj Palace
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="program-item">
+
+                            <div class="program-date">
+
+                                <strong>12</strong>
+                                NOV
+
+                            </div>
+
+                            <div>
+
+                                <div class="program-name">
+                                    Wedding Ceremony
+                                </div>
+
+                                <div class="program-location">
+                                    Raj Palace Hall
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="program-item">
+
+                            <div class="program-date">
+
+                                <strong>12</strong>
+                                NOV
+
+                            </div>
+
+                            <div>
+
+                                <div class="program-name">
+                                    Reception
+                                </div>
+
+                                <div class="program-location">
+                                    Raj Palace Hall
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- =========================================================
+     FOOTER
+========================================================= -->
+
+    <footer class="footer">
+
+        <div>
+            © 2026 Matrimonial Admin. All rights reserved.
+        </div>
+
+        <div class="footer-center">
+            ❖ &nbsp; शुभ विवाह &nbsp; ❖
+        </div>
+
+        <div>
+            Designed with ❤️ for Beautiful Beginnings
+        </div>
+
+    </footer>
+
+
+    <!-- Bootstrap JS -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
